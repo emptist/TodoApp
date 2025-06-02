@@ -1,61 +1,39 @@
-//
-//  ContentView.swift
-//  TodoApp
-//
-//  Created by jk on 03/06/2025.
-//
-
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+        NavigationView {
+            TaskListView()
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+// Updated Preview for ContentView to include Dark Mode
+#Preview("ContentView") {
+    // Helper closure to create and populate the container for preview
+    // This is similar to TaskListView's preview container.
+    // For a real app, this might be a shared utility.
+    @MainActor
+    func getPreviewContainer() -> ModelContainer {
+        do {
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: TaskItem.self, configurations: config)
+            
+            // Add some basic sample data, as TaskListView's preview does more extensive seeding.
+            container.mainContext.insert(TaskItem(title: "Sample Task 1 (Content)", category: "Home"))
+            container.mainContext.insert(TaskItem(title: "Sample Task 2 (Content)", isCompleted: true, category: "Work"))
+            
+            return container
+        } catch {
+            fatalError("Failed to create model container for preview: \(error)")
+        }
+    }
+
+    return ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
+        ContentView()
+            .modelContainer(getPreviewContainer()) // Provide the model container
+            .preferredColorScheme(colorScheme)
+//            .previewDisplayName("ContentView - \(colorScheme == .dark ? "Dark" : "Light")")
+    }
 }
