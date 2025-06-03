@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4824A1462DEFB1E300B8755F /* prompts.md in Resources */ = {isa = PBXBuildFile; fileRef = 4824A1452DEFB1E300B8755F /* prompts.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		48D12BE62DEE63C2003C9479 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4824A1452DEFB1E300B8755F /* prompts.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = prompts.md; sourceTree = "<group>"; };
 		48D12BD32DEE63BF003C9479 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D12BE52DEE63C2003C9479 /* TodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D12BEF2DEE63C2003C9479 /* TodoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +80,7 @@
 		48D12BCA2DEE63BF003C9479 = {
 			isa = PBXGroup;
 			children = (
+				4824A1452DEFB1E300B8755F /* prompts.md */,
 				48D12BD52DEE63BF003C9479 /* TodoApp */,
 				48D12BE82DEE63C2003C9479 /* TodoAppTests */,
 				48D12BF22DEE63C2003C9479 /* TodoAppUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4824A1462DEFB1E300B8755F /* prompts.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
